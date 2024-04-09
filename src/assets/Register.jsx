@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { Link } from "react-router-dom"
-
-=======
->>>>>>> origin/main
 export const Register = () => {
 
     return (
@@ -15,10 +11,7 @@ export const Register = () => {
             <input type="text" placeholder="Username" />
             <input type="password" placeholder="Password" />
             <button type="submit">Register</button>
-<<<<<<< HEAD
-            <Link className="flex justify-center m-5" to="/">Login(Have you profile?)</Link>
-=======
->>>>>>> origin/main
+<Link className="flex justify-center m-5" to="/">Login(Have you profile?)</Link>
         </form>
         </div>
     )

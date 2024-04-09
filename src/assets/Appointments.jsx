@@ -1,9 +1,10 @@
 
     import { useEffect, useState } from 'react';
+import { Nav } from './NavBar/Nav';
   
         export const Appointments = () => {
             const [appointments, setAppointments] = useState([]);
-            const API_URL = 'https://my-json-server.typicode.com/Codaisseur/patient-doctor-data/appointments';
+            const API_URL = '';
 
             useEffect(() => {
                 // Fetch appointments from an API or database
@@ -15,29 +16,34 @@
             }, []);
 
             return (
+            <>
+            <Nav/>
                 <div>
                     <h1 className="flex justify-center text-xl">Welcome to your appointment dashboard</h1>
-                    <table flex justify-center>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Location</th>
-                                <th>Doctor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {appointments.map(appointment => (
-                                <tr key={appointment.id}>
-                                    <td>{appointment.date}</td>
-                                    <td>{appointment.time}</td>
-                                    <td>{appointment.location}</td>
-                                    <td>{appointment.doctor}</td>
+                    <div className="overflow-x-auto">
+                        <table className="flex justify-center border-collapse border border-gray-300">
+                            <thead>
+                                <tr>
+                                    <th className="p-2 border border-gray-300">Date</th>
+                                    <th className="p-2 border border-gray-300">Time</th>
+                                    <th className="p-2 border border-gray-300">Event</th>
+                                    <th className="p-2 border border-gray-300">Location</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {appointments.map(appointment => (
+                                    <tr key={appointment.id}>
+                                        <td className="p-2 border border-gray-300">{appointment.date}</td>
+                                        <td className="p-2 border border-gray-300">{appointment.time}</td>
+                                        <td className="p-2 border border-gray-300">{appointment.location}</td>
+                                        <td className="p-2 border border-gray-300">{appointment.doctor}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+         </>
             );
         }
 
