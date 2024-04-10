@@ -7,6 +7,7 @@ import { Profile } from './assets/Profile'
 import { CreateAppointment } from './assets/CreateAppointment'
 
 
+
 function App() {
 
   return (
@@ -16,10 +17,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/appointments' element={<Appointments />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='*' element={<CreateAppointment />} />
-
-
-
+        <Route path='/new_appointment' element={<CreateAppointment />} />
       </Routes>
     </BrowserRouter>
   )
