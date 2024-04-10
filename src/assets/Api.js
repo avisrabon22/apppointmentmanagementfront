@@ -10,4 +10,11 @@ export const Api = async (userData) => {
   }
 };
 
- 
+ export const LoginApi = async (userData) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/login`, userData);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
