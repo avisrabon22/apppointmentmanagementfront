@@ -4,7 +4,7 @@ export const Nav = () => {
 
     return (
         <nav className="bg-gray-200 py-4 px-6">
-            <p className="text-xl font-bold">Appointment Management</p>
+            <p className="text-xl font-bold">Appointment Management System</p>
             <ul className="flex space-x-4 justify-center">
                 <li>
                     <NavLink
@@ -22,6 +22,15 @@ export const Nav = () => {
                         activeClassName="text-blue-700 font-bold"
                     >
                         Profile
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
+                        to="/new_appointment"
+                        className="text-blue-500 hover:text-blue-700"
+                        activeClassName="text-blue-700 font-bold"
+                    >
+                        New Appointment
                     </NavLink>
                 </li>
             </ul>
