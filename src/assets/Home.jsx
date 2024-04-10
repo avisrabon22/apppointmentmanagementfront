@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { LoginApi } from "./Api";
 import { notifyError, notifySuccess } from "./Tools/Notification";
 
+//  Home component
 export const Home = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -22,16 +24,17 @@ export const Home = () => {
             const response = await LoginApi(formData);
             if (response.status === 200) {
                 notifySuccess(response);
+                return navigate('/appointments');
             }
         } catch (error) {
             notifyError("Login failed! Please try again.");
-            console.log(error);
+            // console.log(error);
+            // Reset form fields
+            setFormData({
+                username: '',
+                password: ''
+            });
         }
-        // Reset form fields
-        setFormData({
-            username: '',
-            password: ''
-        });
     }
     return (
         <div >
@@ -41,7 +44,7 @@ export const Home = () => {
                 <form onSubmit={handleSubmit} className="flex justify-center flex-col items-center">
                     <input name="username" onChange={handleChange} value={formData.username} className=" border border-blue-300 p-2 m-2" type="text" placeholder="Username" />
                     <input name="password" onChange={handleChange} value={formData.password} className="border border-blue-300 p-2 m-2" type="password" placeholder="Password" />
-                    <button className="border border-blue-300 rounded-md py-2 px-6 m-2 hover:bg-blue-500" type="submit">Login</button>
+                    <button className="border border-blue-300 rounded-md py-2 px-6 m-2 hover:bg-blue-500 active:bg-blue-600" type="submit">Login</button>
                     <Link className="flex justify-center m-5" to="/register">Register(Create your profile)</Link>
                 </form>
             </div>

@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom"
 
 export const Nav = () => {
+    const handleLogout = () => {
+        // localStorage.removeItem('token');
+        // window.location.href = '/';
+    }
 
     return (
         <nav className="bg-gray-200 py-4 px-6">
@@ -32,6 +36,13 @@ export const Nav = () => {
                     >
                         New Appointment
                     </NavLink>
+                </li>
+                <li className="flex justify-end">
+                  <input type="button" 
+                  name="logout" 
+                  value="Logout" 
+                  onClick={handleLogout}
+                   className="border border-blue-300 p-2 m-2 hover:bg-blue-400 active:bg-blue-600 rounded-md" />
                 </li>
             </ul>
         </nav>
