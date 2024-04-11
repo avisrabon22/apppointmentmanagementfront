@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import {Api} from "./Api";
+import {Api} from "./Tools/Api";
 import { notifyError, notifySuccess } from "./Tools/Notification";
 
 export const Register = () => {
