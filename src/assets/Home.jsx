@@ -23,6 +23,7 @@ export const Home = () => {
             console.log(formData);
             const response = await LoginApi(formData);
             if (response.status === 200) {
+                console.log(response);
                 notifySuccess(response);
                 return navigate('/appointments');
             }
