@@ -1,18 +1,21 @@
 
 import { useEffect, useState } from 'react';
 import { Nav } from './NavBar/Nav';
+import { AppointmentsApi } from './Tools/Api';
 
 export const Appointments = () => {
     const [appointments, setAppointments] = useState([]);
-    const API_URL = '';
 
     useEffect(() => {
         // Fetch appointments from an API or database
         // Replace the API_URL with your actual API endpoint
-        fetch(API_URL)
-            .then(response => response.json())
-            .then(data => setAppointments(data))
-            .catch(error => console.error(error));
+      const getAppointments = async () => {
+        const response = await AppointmentsApi();
+        const data = await response.json();
+        console.log(data);
+        setAppointments(data);
+      };
+      getAppointments();
     }, []);
 
     return (
@@ -36,7 +39,7 @@ export const Appointments = () => {
                                     <td className="p-2 border border-gray-300">{appointment.date}</td>
                                     <td className="p-2 border border-gray-300">{appointment.time}</td>
                                     <td className="p-2 border border-gray-300">{appointment.location}</td>
-                                    <td className="p-2 border border-gray-300">{appointment.doctor}</td>
+                                    <td className="p-2 border border-gray-300">{appointment.purpose}</td>
                                 </tr>
                             ))}
                         </tbody>

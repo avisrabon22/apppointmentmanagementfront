@@ -21,14 +21,16 @@ export const Home = () => {
         e.preventDefault();
         try {
             console.log(formData);
+            if (!formData.username.trim() || !formData.password.trim()) {
+                return notifyError("Please fill all fields!");
+            }
             const response = await LoginApi(formData);
             if (response.status === 200) {
-                console.log(response);
-                notifySuccess(response);
+                notifySuccess(response.data);
                 return navigate('/appointments');
             }
         } catch (error) {
-            notifyError("Login failed! Please try again.");
+            notifyError("Login failed! Please try again.)");
             // console.log(error);
             // Reset form fields
             setFormData({

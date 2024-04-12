@@ -1,9 +1,10 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:8080/api/v1/user';
+const USER_URL = 'http://localhost:8080/api/v1/user';
+const APPOINTMENT_URL = 'http://localhost:8080/api/v1/appointments';
 
 export const Api = async (userData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/register`, userData);
+    const response = await axios.post(`${USER_URL}/register`, userData);
     return response.data;
   } catch (error) {
     throw error;
@@ -12,7 +13,21 @@ export const Api = async (userData) => {
 
  export const LoginApi = async (userData) => {
     try {
-        const response = await axios.post(`${BASE_URL}/login`, userData);
+        const response = await axios.post(`${USER_URL}/login`, userData);
+        console.log();
+        
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+export const AppointmentsApi = async () => {
+    try {
+        const response = (await axios.get(`${APPOINTMENT_URL}/get_all_appointments`));
+      
+        console.log(response.data);
         return response.data;
     } catch (error) {
         throw error;
