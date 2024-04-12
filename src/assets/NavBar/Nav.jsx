@@ -14,7 +14,7 @@ export const Nav = () => {
                     <NavLink
                         to="/appointments"
                         className="text-blue-500 hover:text-blue-700"
-                        activeClassName="text-blue-700 font-bold"
+                        
                     >
                         Appointments
                     </NavLink>
@@ -23,7 +23,7 @@ export const Nav = () => {
                     <NavLink
                         to="/profile"
                         className="text-blue-500 hover:text-blue-700"
-                        activeClassName="text-blue-700 font-bold"
+                      
                     >
                         Profile
                     </NavLink>
@@ -32,7 +32,7 @@ export const Nav = () => {
                     <NavLink
                         to="/new_appointment"
                         className="text-blue-500 hover:text-blue-700"
-                        activeClassName="text-blue-700 font-bold"
+                      
                     >
                         New Appointment
                     </NavLink>
