@@ -13,19 +13,21 @@ export const Api = async (userData) => {
 
 export const LoginApi = async (userData) => {
   try {
-    const response = await axios.post(`${USER_URL}/login`, userData,{withCredentials: true});
-    return response;
-  } catch (error) {
+    const response=await axios.post(`${USER_URL}/login`, userData, { withCredentials: true })
+      return response;
+    }
+  catch (error) {
     throw error;
   }
-}
+};
 
 
 export const AppointmentsApi = async () => {
   try {
-    const response = (await axios.get(`${APPOINTMENT_URL}/get_all_appointments`));
-    console.log(response.data);
-    return response.data;
+   await axios.get(`${APPOINTMENT_URL}/get_all_appointments`,{withCredentials:true}).then((response) => {
+    console.log(response.status);
+      return response.data;
+    });
   } catch (error) {
     throw error;
   }

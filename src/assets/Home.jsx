@@ -25,10 +25,9 @@ export const Home = () => {
                 return notifyError("Please fill all fields!");
             }
             const response = await LoginApi(formData);
-            console.log(document.cookie);
             if (response.status === 200) {
                 notifySuccess(response.data);
-                // return navigate('/appointments');
+                return navigate('/appointments');
             }
         } catch (error) {
             notifyError("Login failed! Please try again.)");

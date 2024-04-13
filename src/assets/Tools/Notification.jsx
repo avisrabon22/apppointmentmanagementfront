@@ -15,7 +15,7 @@ const notifySuccess = (msg) => {
   // Display error notification
   const notifyError = (msg) => {
     toast.error(msg, {
-      position: 'top-right',
+      position: 'bottom-center',
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,

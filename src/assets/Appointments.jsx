@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Nav } from './NavBar/Nav';
 import { AppointmentsApi } from './Tools/Api';
+import { notifyError } from './Tools/Notification';
 
 export const Appointments = () => {
     const [appointments, setAppointments] = useState([]);
@@ -10,16 +11,21 @@ export const Appointments = () => {
         // Fetch appointments from an API or database
         // Replace the API_URL with your actual API endpoint
       const getAppointments = async () => {
+        try {
         const response = await AppointmentsApi();
-        const data = await response.json();
-        console.log(data);
+        const data = await response.data;
         setAppointments(data);
+        }
+        catch (error) {
+            notifyError("Failed to fetch appointments! Please try again.");
+        }
       };
       getAppointments();
     }, []);
 
     return (
         <>
+           {}
             <Nav />
             <div>
                 <h1 className="flex justify-center text-xl">Welcome to your appointment dashboard</h1>
