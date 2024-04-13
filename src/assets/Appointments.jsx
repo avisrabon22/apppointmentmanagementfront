@@ -3,29 +3,40 @@ import { useEffect, useState } from 'react';
 import { Nav } from './NavBar/Nav';
 import { AppointmentsApi } from './Tools/Api';
 import { notifyError } from './Tools/Notification';
+import { useNavigate } from 'react-router-dom';
 
 export const Appointments = () => {
+    const navigate = useNavigate() ;
     const [appointments, setAppointments] = useState([]);
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    
     useEffect(() => {
         // Fetch appointments from an API or database
-        // Replace the API_URL with your actual API endpoint
-      const getAppointments = async () => {
-        try {
-        const response = await AppointmentsApi();
-        const data = await response.data;
-        setAppointments(data);
-        }
-        catch (error) {
-            notifyError("Failed to fetch appointments! Please try again.");
-        }
-      };
-      getAppointments();
+        const getAppointments = async () => {
+            try {
+                const response = await AppointmentsApi();
+                if(response.status === 200){
+                    setIsLoggedIn(true);
+                    const data = await response.data;
+                    setAppointments(data);
+                }
+                else{
+                    setIsLoggedIn(false);
+                }
+            }
+            catch (error) {
+                notifyError("Failed to fetch appointments! Please try again.");
+            }
+        };
+        getAppointments();
     }, []);
 
+
+  
     return (
         <>
-           {}
+        { isLoggedIn? navigate('/'): 
+            <div className="flex justify-center">
             <Nav />
             <div>
                 <h1 className="flex justify-center text-xl">Welcome to your appointment dashboard</h1>
@@ -52,6 +63,8 @@ export const Appointments = () => {
                     </table>
                 </div>
             </div>
+        </div>
+        }
         </>
     );
 }

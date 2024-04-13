@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
-import { LoginApi } from "./Tools/Api";
+import { LoginApi, UserValidationApi } from "./Tools/Api";
 import { notifyError, notifySuccess } from "./Tools/Notification";
 
 //  Home component
 export const Home = () => {
     const navigate = useNavigate();
+    const [isLoggedIn, setLoggedIn] = useState(false);
+
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -15,6 +17,30 @@ export const Home = () => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
+
+    // Validate user login status 
+    useEffect(() => {
+        const checkUser = async () => {
+            try {
+                const response = await UserValidationApi();
+                console.log(response.status);
+                if (response.status === 200) {
+                    setLoggedIn(true);
+                    notifySuccess(response.data);
+                }
+                else {
+                    setLoggedIn(false);
+                }
+
+            } catch (error) {
+                notifyError(error.response.data);
+                console.log(error);
+            }
+        }
+        checkUser();
+    }
+        , []);
+
 
     // Handle the form submission 
     const handleSubmit = async (e) => {
@@ -39,18 +65,24 @@ export const Home = () => {
             });
         }
     }
+
     return (
-        <div >
-            <h1 className="flex justify-center text-xl m-10">Welcome to Appointment Management</h1>
-            <div >
-                <p className="flex justify-center text-xl m-5">Login Portal</p>
-                <form onSubmit={handleSubmit} className="flex justify-center flex-col items-center">
-                    <input name="username" onChange={handleChange} value={formData.username} className=" border border-blue-300 p-2 m-2" type="text" placeholder="Username" />
-                    <input name="password" onChange={handleChange} value={formData.password} className="border border-blue-300 p-2 m-2" type="password" placeholder="Password" />
-                    <button className="border border-blue-300 rounded-md py-2 px-6 m-2 hover:bg-blue-500 active:bg-blue-600" type="submit">Login</button>
-                    <Link className="flex justify-center m-5" to="/register">Register(Create your profile)</Link>
-                </form>
-            </div>
-        </div>
+        <>
+            {isLoggedIn ? navigate('/appointments') :
+
+                <div >
+                    <h1 className="flex justify-center text-xl m-10">Welcome to Appointment Management</h1>
+                    <div >
+                        <p className="flex justify-center text-xl m-5">Login Portal</p>
+                        <form onSubmit={handleSubmit} className="flex justify-center flex-col items-center">
+                            <input name="username" onChange={handleChange} value={formData.username} className=" border border-blue-300 p-2 m-2" type="text" placeholder="Username" />
+                            <input name="password" onChange={handleChange} value={formData.password} className="border border-blue-300 p-2 m-2" type="password" placeholder="Password" />
+                            <button className="border border-blue-300 rounded-md py-2 px-6 m-2 hover:bg-blue-500 active:bg-blue-600" type="submit">Login</button>
+                            <Link className="flex justify-center m-5" to="/register">Register(Create your profile)</Link>
+                        </form>
+                    </div>
+                </div>
+            }
+        </>
     )
 }

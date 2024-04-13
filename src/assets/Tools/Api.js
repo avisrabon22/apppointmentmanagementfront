@@ -21,12 +21,30 @@ export const LoginApi = async (userData) => {
   }
 };
 
+export const UserValidationApi = async () => {
+  try {
+    const response = await axios.get(`${USER_URL}/validate`, { withCredentials: true });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const LogoutApi = async () => {
+  try {
+    await axios.post(`${USER_URL}/logout`, { withCredentials: true });
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 
 export const AppointmentsApi = async () => {
   try {
    await axios.get(`${APPOINTMENT_URL}/get_all_appointments`,{withCredentials:true}).then((response) => {
-    console.log(response.status);
-      return response.data;
+    //console.log(response.status);
+      return response;
     });
   } catch (error) {
     throw error;
