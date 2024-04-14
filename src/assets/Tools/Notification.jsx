@@ -9,7 +9,9 @@ const notifySuccess = (msg) => {
       closeOnClick: true, // Close the notification when clicked
       pauseOnHover: true, // Pause auto close on hover
       draggable: true, // Allow the notification to be dragged
+      
     });
+    // toast.dismiss();
   };
   
   // Display error notification
@@ -22,6 +24,7 @@ const notifySuccess = (msg) => {
       pauseOnHover: true,
       draggable: true,
     });
+    
   };
 
     export { notifySuccess, notifyError };

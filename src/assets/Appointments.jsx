@@ -6,9 +6,14 @@ import { notifyError } from './Tools/Notification';
 import { useNavigate } from 'react-router-dom';
 
 export const Appointments = () => {
-    const navigate = useNavigate() ;
     const [appointments, setAppointments] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate() ;
+    useEffect(() => {
+        if (!isLoggedIn) {
+           return navigate('/');
+    }
+  },[]);
     
     useEffect(() => {
         // Fetch appointments from an API or database
@@ -30,13 +35,11 @@ export const Appointments = () => {
         };
         getAppointments();
     }, []);
+    
+    
 
-
-  
     return (
-        <>
-        { isLoggedIn? navigate('/'): 
-            <div className="flex justify-center">
+            <>
             <Nav />
             <div>
                 <h1 className="flex justify-center text-xl">Welcome to your appointment dashboard</h1>
@@ -63,9 +66,6 @@ export const Appointments = () => {
                     </table>
                 </div>
             </div>
-        </div>
-        }
         </>
     );
-}
-
+};
